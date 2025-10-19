@@ -1,1 +1,1176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAPPY DAY - Season 2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+            user-select: none;
+        }
+        
+        body {
+            background-color: #000;
+            color: #8b0000;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(139, 0, 0, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(139, 0, 0, 0.1) 0%, transparent 20%);
+        }
+        
+        .screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+            z-index: 1;
+        }
+        
+        .active {
+            display: flex;
+        }
+        
+        .glitch-effect {
+            position: relative;
+        }
+        
+        .glitch-effect::before,
+        .glitch-effect::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .glitch-effect::before {
+            left: 2px;
+            text-shadow: -1px 0 #0ff;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+        
+        .glitch-effect::after {
+            left: -2px;
+            text-shadow: -1px 0 #f0f;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+        
+        @keyframes glitch-anim {
+            0% { clip: rect(42px, 9999px, 44px, 0); }
+            5% { clip: rect(12px, 9999px, 59px, 0); }
+            10% { clip: rect(48px, 9999px, 29px, 0); }
+            15% { clip: rect(42px, 9999px, 73px, 0); }
+            20% { clip: rect(63px, 9999px, 27px, 0); }
+            25% { clip: rect(34px, 9999px, 55px, 0); }
+            30% { clip: rect(86px, 9999px, 73px, 0); }
+            35% { clip: rect(20px, 9999px, 20px, 0); }
+            40% { clip: rect(26px, 9999px, 60px, 0); }
+            45% { clip: rect(25px, 9999px, 66px, 0); }
+            50% { clip: rect(57px, 9999px, 98px, 0); }
+            55% { clip: rect(5px, 9999px, 46px, 0); }
+            60% { clip: rect(82px, 9999px, 31px, 0); }
+            65% { clip: rect(54px, 9999px, 27px, 0); }
+            70% { clip: rect(28px, 9999px, 99px, 0); }
+            75% { clip: rect(45px, 9999px, 69px, 0); }
+            80% { clip: rect(23px, 9999px, 85px, 0); }
+            85% { clip: rect(54px, 9999px, 84px, 0); }
+            90% { clip: rect(45px, 9999px, 47px, 0); }
+            95% { clip: rect(37px, 9999px, 20px, 0); }
+            100% { clip: rect(4px, 9999px, 91px, 0); }
+        }
+        
+        @keyframes glitch-anim2 {
+            0% { clip: rect(65px, 9999px, 100px, 0); }
+            5% { clip: rect(52px, 9999px, 74px, 0); }
+            10% { clip: rect(79px, 9999px, 85px, 0); }
+            15% { clip: rect(75px, 9999px, 5px, 0); }
+            20% { clip: rect(67px, 9999px, 61px, 0); }
+            25% { clip: rect(14px, 9999px, 79px, 0); }
+            30% { clip: rect(1px, 9999px, 66px, 0); }
+            35% { clip: rect(86px, 9999px, 30px, 0); }
+            40% { clip: rect(23px, 9999px, 98px, 0); }
+            45% { clip: rect(85px, 9999px, 72px, 0); }
+            50% { clip: rect(71px, 9999px, 75px, 0); }
+            55% { clip: rect(2px, 9999px, 48px, 0); }
+            60% { clip: rect(30px, 9999px, 16px, 0); }
+            65% { clip: rect(59px, 9999px, 50px, 0); }
+            70% { clip: rect(41px, 9999px, 62px, 0); }
+            75% { clip: rect(2px, 9999px, 82px, 0); }
+            80% { clip: rect(47px, 9999px, 73px, 0); }
+            85% { clip: rect(3px, 9999px, 27px, 0); }
+            90% { clip: rect(26px, 9999px, 55px, 0); }
+            95% { clip: rect(42px, 9999px, 97px, 0); }
+            100% { clip: rect(38px, 9999px, 49px, 0); }
+        }
+        
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000;
+            letter-spacing: 5px;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #8b0000;
+        }
+        
+        .season {
+            font-size: 1.5rem;
+            color: #8b0000;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .btn {
+            background-color: #000;
+            color: #8b0000;
+            border: 2px solid #8b0000;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:hover {
+            background-color: #8b0000;
+            color: #000;
+            box-shadow: 0 0 20px #ff0000;
+        }
+        
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .btn:disabled:hover {
+            background-color: #000;
+            color: #8b0000;
+            box-shadow: none;
+        }
+        
+        .level-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .level-btn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid #8b0000;
+            color: #8b0000;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .level-btn:hover:not(.locked) {
+            background-color: rgba(139, 0, 0, 0.3);
+            box-shadow: 0 0 10px #ff0000;
+        }
+        
+        .locked {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .lock-icon {
+            font-size: 1.5rem;
+        }
+        
+        .erase-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #8b0000;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        .typing-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            max-width: 800px;
+            text-align: left;
+            border: 1px solid #8b0000;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            height: 200px;
+            overflow-y: auto;
+        }
+        
+        .input-container {
+            margin: 20px 0;
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            background-color: #000;
+            border: 1px solid #8b0000;
+            color: #8b0000;
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        
+        .user-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+            justify-content: center;
+        }
+        
+        .user-chip {
+            background-color: rgba(139, 0, 0, 0.3);
+            border: 1px solid #8b0000;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .user-chip:hover {
+            background-color: rgba(139, 0, 0, 0.5);
+        }
+        
+        .user-chip.selected {
+            background-color: #8b0000;
+            color: #000;
+        }
+        
+        .spinner-container {
+            width: 300px;
+            height: 300px;
+            position: relative;
+            margin: 30px auto;
+        }
+        
+        .spinner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 5px solid #8b0000;
+            position: relative;
+            overflow: hidden;
+            animation: spin 0.1s linear infinite;
+        }
+        
+        .spinner-item {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            transform-origin: 100% 100%;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #8b0000;
+        }
+        
+        .spinner-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background-color: #000;
+            border-radius: 50%;
+            border: 3px solid #8b0000;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #8b0000;
+        }
+        
+        .selected-name {
+            font-size: 2rem;
+            margin: 20px 0;
+            color: #ff0000;
+            text-shadow: 0 0 10px #ff0000;
+            animation: pulse 2s infinite;
+        }
+        
+        .mission-text {
+            font-size: 1.5rem;
+            margin: 20px 0;
+            color: #8b0000;
+            text-align: center;
+        }
+        
+        .alert-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .alert-text {
+            font-size: 1.5rem;
+            color: #ff0000;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px #ff0000;
+            animation: blink 1s infinite;
+        }
+        
+        .video-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 300px;
+            height: 200px;
+            border: 2px solid #8b0000;
+            overflow: hidden;
+            filter: blur(1px) grayscale(100%) contrast(150%) brightness(70%);
+        }
+        
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .countdown {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 1rem;
+            color: #8b0000;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 5px 10px;
+            border: 1px solid #8b0000;
+        }
+        
+        .static-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(0deg, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 1px, transparent 1px, transparent 2px),
+                repeating-linear-gradient(90deg, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 1px, transparent 1px, transparent 2px);
+            pointer-events: none;
+            z-index: 5;
+            opacity: 0.3;
+            animation: static 0.2s infinite;
+        }
+        
+        .scanlines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(255,255,255,0) 0%,
+                rgba(255,255,255,0.06) 50%,
+                rgba(255,255,255,0) 100%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 6;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+        
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+        
+        @keyframes static {
+            0% { background-position: 0 0; }
+            100% { background-position: 20px 20px; }
+        }
+        
+        .flicker {
+            animation: flicker 0.15s infinite;
+        }
+        
+        @keyframes flicker {
+            0% { opacity: 0.9; }
+            5% { opacity: 0.8; }
+            10% { opacity: 0.9; }
+            15% { opacity: 0.7; }
+            20% { opacity: 0.9; }
+            25% { opacity: 0.8; }
+            30% { opacity: 1; }
+            35% { opacity: 0.7; }
+            40% { opacity: 0.9; }
+            45% { opacity: 0.8; }
+            50% { opacity: 1; }
+            55% { opacity: 0.8; }
+            60% { opacity: 0.9; }
+            65% { opacity: 0.7; }
+            70% { opacity: 0.9; }
+            75% { opacity: 0.8; }
+            80% { opacity: 1; }
+            85% { opacity: 0.7; }
+            90% { opacity: 0.9; }
+            95% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+        
+        /* Fullscreen and landscape styles */
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        @media screen and (orientation:portrait) {
+            .orientation-warning {
+                display: flex;
+            }
+        }
+        
+        .orientation-warning {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            color: #8b0000;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .orientation-warning h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .orientation-warning p {
+            font-size: 1.2rem;
+            max-width: 500px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Orientation Warning -->
+    <div class="orientation-warning">
+        <h2>PUTAR PERANGKAT ANDA</h2>
+        <p>Game ini hanya dapat dimainkan dalam mode landscape. Silakan putar perangkat Anda untuk melanjutkan.</p>
+    </div>
 
+    <!-- Start Screen -->
+    <div id="start-screen" class="screen active">
+        <h1 class="glitch-effect" data-text="HAPPY DAY">HAPPY DAY</h1>
+        <div class="season">Season 2</div>
+        <button id="start-btn" class="btn">START GAME</button>
+    </div>
+
+    <!-- Level Selection Screen -->
+    <div id="level-screen" class="screen">
+        <button id="erase-btn" class="erase-btn" title="Hapus Semua Progres">🗑️</button>
+        <h2>PILIH LEVEL</h2>
+        <div class="level-container">
+            <div class="level-btn" id="level-1">
+                <span>LEVEL 1</span>
+                <span>🔓</span>
+            </div>
+            <div class="level-btn locked" id="level-2">
+                <span>LEVEL 2</span>
+                <span class="lock-icon">🔒</span>
+            </div>
+            <div class="level-btn locked" id="level-3">
+                <span>LEVEL 3</span>
+                <span class="lock-icon">🔒</span>
+            </div>
+        </div>
+        <div id="level-info" class="typing-text" style="margin-top: 20px; display: none;">
+            Level game ini sedang dalam pengembangan (HAPPY DAY Present)
+        </div>
+    </div>
+
+    <!-- Story Screen -->
+    <div id="story-screen" class="screen">
+        <div class="typing-text" id="story-text"></div>
+        <button id="next-story-btn" class="btn" style="display: none;">LANJUT</button>
+    </div>
+
+    <!-- User Input Screen -->
+    <div id="user-input-screen" class="screen">
+        <h2>MASUKKAN DATA PENGGUNA</h2>
+        <p>Pilih atau ketik nama pengguna:</p>
+        <div class="user-list">
+            <div class="user-chip" data-name="Reyvan">Reyvan</div>
+            <div class="user-chip" data-name="Balqis">Balqis</div>
+            <div class="user-chip" data-name="Saka">Saka</div>
+            <div class="user-chip" data-name="Carol">Carol</div>
+        </div>
+        <div class="input-container">
+            <input type="text" id="custom-name" placeholder="Atau ketik nama manual...">
+            <button id="save-name-btn" class="btn">SIMPAN</button>
+        </div>
+    </div>
+
+    <!-- Mission 1 Screen -->
+    <div id="mission-1-screen" class="screen">
+        <h2>MISI 1: PEMILIHAN KETUA</h2>
+        <div class="spinner-container">
+            <div class="spinner" id="name-spinner"></div>
+            <div class="spinner-center">?</div>
+        </div>
+        <div id="selected-leader" class="selected-name"></div>
+        <button id="next-mission-1-btn" class="btn" style="display: none;">LANJUT</button>
+    </div>
+
+    <!-- Mission 2 Screen -->
+    <div id="mission-2-screen" class="screen">
+        <div class="typing-text" id="mission-2-text"></div>
+        <div class="input-container">
+            <input type="text" id="key-input" placeholder="Masukkan kata kunci...">
+            <button id="check-key-btn" class="btn">CEK KATA KUNCI</button>
+        </div>
+        <div id="key-result" style="margin-top: 20px;"></div>
+    </div>
+
+    <!-- Mission 3 Screen -->
+    <div id="mission-3-screen" class="screen">
+        <h2>MISI 3: PEMILIHAN ORANG YANG MUNDUR</h2>
+        <div class="spinner-container">
+            <div class="spinner" id="step-back-spinner"></div>
+            <div class="spinner-center">?</div>
+        </div>
+        <div id="selected-step-back" class="selected-name"></div>
+        <div class="typing-text" id="mission-3-instruction" style="margin-top: 20px;"></div>
+        <button id="next-mission-3-btn" class="btn" style="display: none;">LANJUT</button>
+    </div>
+
+    <!-- Mission 4 Screen -->
+    <div id="mission-4-screen" class="screen">
+        <div class="typing-text" id="mission-4-text"></div>
+        <button id="next-mission-4-btn" class="btn" style="display: none;">LANJUT</button>
+    </div>
+
+    <!-- Mission 5 Screen -->
+    <div id="mission-5-screen" class="screen">
+        <div class="typing-text" id="mission-5-text"></div>
+        <button id="finish-game-btn" class="btn" style="display: none;">SELESAI</button>
+    </div>
+
+    <!-- Game Complete Screen -->
+    <div id="complete-screen" class="screen">
+        <h2>MISI SELESAI</h2>
+        <div class="typing-text">
+            Misi yang anda kerjakan sudah selesai, pastikan jangan membuka ulang games horor ini karna kalau kalian tidak menyelesaikan misi kami akan datang dan menghantui kalian di jam 20.00 setiap hari Sabtu, minggu, kamis, Jumat.
+        </div>
+    </div>
+
+    <!-- Alert Screen -->
+    <div id="alert-screen" class="screen alert-container" style="display: none;">
+        <div class="video-container">
+            <iframe id="alert-video" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="alert-text" id="alert-message"></div>
+        <div class="countdown" id="alert-countdown"></div>
+    </div>
+
+    <!-- Visual Effects -->
+    <div class="static-overlay"></div>
+    <div class="scanlines"></div>
+
+    <!-- Audio Elements -->
+    <audio id="main-bg-audio" loop>
+        <source src="https://www.youtube.com/embed/lVBBIkA7tMI?autoplay=1&loop=1&playlist=lVBBIkA7tMI" type="audio/mpeg">
+    </audio>
+    
+    <audio id="alert-bg-audio" loop>
+        <source src="https://www.youtube.com/embed/flKtFnB4OVs?autoplay=1&loop=1&playlist=flKtFnB4OVs" type="audio/mpeg">
+    </audio>
+    
+    <audio id="start-sound">
+        <source src="https://www.youtube.com/embed/d40PeoOXE1E?autoplay=1" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Game state
+        const gameState = {
+            currentScreen: 'start-screen',
+            users: [],
+            leader: null,
+            stepBackUser: null,
+            keyFound: false,
+            missionsCompleted: 0,
+            permissionsGranted: false
+        };
+
+        // DOM Elements
+        const screens = document.querySelectorAll('.screen');
+        const startScreen = document.getElementById('start-screen');
+        const levelScreen = document.getElementById('level-screen');
+        const storyScreen = document.getElementById('story-screen');
+        const userInputScreen = document.getElementById('user-input-screen');
+        const mission1Screen = document.getElementById('mission-1-screen');
+        const mission2Screen = document.getElementById('mission-2-screen');
+        const mission3Screen = document.getElementById('mission-3-screen');
+        const mission4Screen = document.getElementById('mission-4-screen');
+        const mission5Screen = document.getElementById('mission-5-screen');
+        const completeScreen = document.getElementById('complete-screen');
+        const alertScreen = document.getElementById('alert-screen');
+
+        // Buttons
+        const startBtn = document.getElementById('start-btn');
+        const eraseBtn = document.getElementById('erase-btn');
+        const level1Btn = document.getElementById('level-1');
+        const level2Btn = document.getElementById('level-2');
+        const level3Btn = document.getElementById('level-3');
+        const nextStoryBtn = document.getElementById('next-story-btn');
+        const saveNameBtn = document.getElementById('save-name-btn');
+        const nextMission1Btn = document.getElementById('next-mission-1-btn');
+        const checkKeyBtn = document.getElementById('check-key-btn');
+        const nextMission3Btn = document.getElementById('next-mission-3-btn');
+        const nextMission4Btn = document.getElementById('next-mission-4-btn');
+        const finishGameBtn = document.getElementById('finish-game-btn');
+
+        // Other elements
+        const storyText = document.getElementById('story-text');
+        const customNameInput = document.getElementById('custom-name');
+        const nameSpinner = document.getElementById('name-spinner');
+        const selectedLeader = document.getElementById('selected-leader');
+        const mission2Text = document.getElementById('mission-2-text');
+        const keyInput = document.getElementById('key-input');
+        const keyResult = document.getElementById('key-result');
+        const stepBackSpinner = document.getElementById('step-back-spinner');
+        const selectedStepBack = document.getElementById('selected-step-back');
+        const mission3Instruction = document.getElementById('mission-3-instruction');
+        const mission4Text = document.getElementById('mission-4-text');
+        const mission5Text = document.getElementById('mission-5-text');
+        const alertMessage = document.getElementById('alert-message');
+        const alertCountdown = document.getElementById('alert-countdown');
+        const alertVideo = document.getElementById('alert-video');
+        
+        // Audio elements
+        const mainBgAudio = document.getElementById('main-bg-audio');
+        const alertBgAudio = document.getElementById('alert-bg-audio');
+        const startSound = document.getElementById('start-sound');
+
+        // Video URLs for alert
+        const alertVideos = [
+            'https://www.youtube.com/embed/8mcXpBb3VzU?autoplay=1&loop=1&playlist=8mcXpBb3VzU',
+            'https://www.youtube.com/embed/JTcOy3bJ4p4?autoplay=1&loop=1&playlist=JTcOy3bJ4p4',
+            'https://www.youtube.com/embed/Yz4Y61lZR_s?autoplay=1&loop=1&playlist=Yz4Y61lZR_s'
+        ];
+        let currentVideoIndex = 0;
+
+        // Initialize game
+        function initGame() {
+            // Request permissions immediately
+            requestPermissions();
+            
+            // Check orientation
+            checkOrientation();
+            window.addEventListener('resize', checkOrientation);
+            window.addEventListener('orientationchange', checkOrientation);
+            
+            // Set up event listeners
+            setupEventListeners();
+            
+            // Start background music
+            setTimeout(() => {
+                mainBgAudio.play().catch(e => console.log('Audio play failed:', e));
+            }, 1000);
+            
+            // Check for alert time
+            checkAlertTime();
+            setInterval(checkAlertTime, 60000); // Check every minute
+            
+            // Load saved game state
+            loadGameState();
+        }
+
+        // Request all necessary permissions
+        function requestPermissions() {
+            // Request notification permission
+            if ('Notification' in window) {
+                Notification.requestPermission().then(permission => {
+                    gameState.permissionsGranted = permission === 'granted';
+                });
+            }
+            
+            // Request camera permission (for future use)
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(stream => {
+                        // Permission granted, but we won't use the stream for now
+                        stream.getTracks().forEach(track => track.stop());
+                    })
+                    .catch(err => {
+                        console.log('Camera permission denied:', err);
+                    });
+            }
+            
+            // Save that permissions were requested
+            gameState.permissionsGranted = true;
+            saveGameState();
+        }
+
+        // Check device orientation
+        function checkOrientation() {
+            const warning = document.querySelector('.orientation-warning');
+            if (window.innerHeight > window.innerWidth) {
+                warning.style.display = 'flex';
+            } else {
+                warning.style.display = 'none';
+            }
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // Screen navigation
+            startBtn.addEventListener('click', goToLevelScreen);
+            eraseBtn.addEventListener('click', eraseProgress);
+            level1Btn.addEventListener('click', () => goToStoryScreen());
+            level2Btn.addEventListener('click', () => showLevelInfo());
+            level3Btn.addEventListener('click', () => showLevelInfo());
+            nextStoryBtn.addEventListener('click', goToUserInputScreen);
+            saveNameBtn.addEventListener('click', saveUserName);
+            nextMission1Btn.addEventListener('click', goToMission2Screen);
+            checkKeyBtn.addEventListener('click', checkKey);
+            nextMission3Btn.addEventListener('click', goToMission4Screen);
+            nextMission4Btn.addEventListener('click', goToMission5Screen);
+            finishGameBtn.addEventListener('click', finishGame);
+            
+            // User chip selection
+            document.querySelectorAll('.user-chip').forEach(chip => {
+                chip.addEventListener('click', function() {
+                    document.querySelectorAll('.user-chip').forEach(c => c.classList.remove('selected'));
+                    this.classList.add('selected');
+                    customNameInput.value = this.getAttribute('data-name');
+                });
+            });
+            
+            // Custom name input
+            customNameInput.addEventListener('input', function() {
+                document.querySelectorAll('.user-chip').forEach(c => c.classList.remove('selected'));
+            });
+        }
+
+        // Show level info for locked levels
+        function showLevelInfo() {
+            const levelInfo = document.getElementById('level-info');
+            levelInfo.style.display = 'block';
+            setTimeout(() => {
+                levelInfo.style.display = 'none';
+            }, 3000);
+        }
+
+        // Navigate to level screen
+        function goToLevelScreen() {
+            // Play start sound
+            startSound.play().catch(e => console.log('Start sound play failed:', e));
+            
+            // Change screen
+            changeScreen('level-screen');
+        }
+
+        // Navigate to story screen
+        function goToStoryScreen() {
+            changeScreen('story-screen');
+            
+            // Type the story text
+            const story = "Hallo saya orang di belakang Anda yang bener² GK keliatan secara wujud tapi saya telah memantau anda setelah anda membuka link website ini dan setuju² semua syarat yang kami berikan sebelum nya berarti anda telah tau konsekuensi nya yaitu anda harus menerima semua teror yang saya berikan di kawasan sini, anda pasti berada di lokasi : Dekat GFX5+PCW TOKO HARIYANTO, Unnamed Road, Jatikulon, Lengkong, Kec. Mojoanyar, Kabupaten Mojokerto, Jawa Timur 61364, anda di sebelah pojok kiri toko Hariyanto jalan njatikulon, dan orang² di dekat anda pasti anak² kecil";
+            typeText(storyText, story, () => {
+                nextStoryBtn.style.display = 'block';
+            });
+        }
+
+        // Navigate to user input screen
+        function goToUserInputScreen() {
+            changeScreen('user-input-screen');
+        }
+
+        // Save user name
+        function saveUserName() {
+            const name = customNameInput.value.trim();
+            if (name) {
+                if (!gameState.users.includes(name)) {
+                    gameState.users.push(name);
+                    saveGameState();
+                }
+                goToMission1Screen();
+            } else {
+                alert('Masukkan nama terlebih dahulu!');
+            }
+        }
+
+        // Navigate to mission 1 screen
+        function goToMission1Screen() {
+            changeScreen('mission-1-screen');
+            
+            // Create spinner items
+            createSpinnerItems(nameSpinner, gameState.users);
+            
+            // Start spinning animation
+            setTimeout(() => {
+                nameSpinner.style.animation = 'spin 0.1s linear infinite';
+            }, 1000);
+            
+            // Stop spinner after 3 seconds and select a leader
+            setTimeout(() => {
+                nameSpinner.style.animation = 'none';
+                const randomIndex = Math.floor(Math.random() * gameState.users.length);
+                gameState.leader = gameState.users[randomIndex];
+                selectedLeader.textContent = gameState.leader;
+                selectedLeader.style.display = 'block';
+                nextMission1Btn.style.display = 'block';
+                saveGameState();
+            }, 3000);
+        }
+
+        // Navigate to mission 2 screen
+        function goToMission2Screen() {
+            changeScreen('mission-2-screen');
+            
+            const missionText = "Kalian harus mencari petunjuk text di sebelah SD mi swasta yang kami pilih menjadikan suatu misi untuk mencari kata kunci untuk menamatkan game horor ini, yaitu kalian harus mencari kertas di masing² karpet di lantai satu satu persatu cari manual dan buka ini clue nya untuk menemukan kata kuncine";
+            typeText(mission2Text, missionText);
+        }
+
+        // Check key input
+        function checkKey() {
+            const key = keyInput.value.trim().toUpperCase();
+            if (key === 'SAT43') {
+                keyResult.innerHTML = '<span style="color: #00ff00;">Kata kunci benar! Memuat misi selanjutnya...</span>';
+                gameState.keyFound = true;
+                saveGameState();
+                
+                setTimeout(() => {
+                    goToMission3Screen();
+                }, 2000);
+            } else {
+                keyResult.innerHTML = '<span style="color: #ff0000;">Kata kunci salah! Coba lagi.</span>';
+            }
+        }
+
+        // Navigate to mission 3 screen
+        function goToMission3Screen() {
+            changeScreen('mission-3-screen');
+            
+            // Create spinner for step back selection
+            createSpinnerItems(stepBackSpinner, gameState.users);
+            
+            // Start spinning animation
+            setTimeout(() => {
+                stepBackSpinner.style.animation = 'spin 0.1s linear infinite';
+            }, 1000);
+            
+            // Stop spinner after 3 seconds and select a user
+            setTimeout(() => {
+                stepBackSpinner.style.animation = 'none';
+                let randomIndex;
+                do {
+                    randomIndex = Math.floor(Math.random() * gameState.users.length);
+                } while (gameState.users[randomIndex] === gameState.leader);
+                
+                gameState.stepBackUser = gameState.users[randomIndex];
+                selectedStepBack.textContent = gameState.stepBackUser;
+                selectedStepBack.style.display = 'block';
+                
+                const instruction = `Langsung di antara orang lain yang di pilih satu harap mundur 5 meter dari perangkat hp salah satu anak yang di pilih. ${gameState.stepBackUser}, harap mundur 5 meter!`;
+                mission3Instruction.textContent = instruction;
+                mission3Instruction.style.display = 'block';
+                
+                nextMission3Btn.style.display = 'block';
+                saveGameState();
+            }, 3000);
+        }
+
+        // Navigate to mission 4 screen
+        function goToMission4Screen() {
+            changeScreen('mission-4-screen');
+            
+            const missionText = "Harap semua orang yang berada di kawasan ini semuanya mengikuti aturan misi ini yaitu memutari sd mi selama 3menit dan setelah selesai dan balik langsung buka pengaturan wifi kalian dan lihat apa yang terjadi, di situ kami akan muncul secara digital karna kamu tidak dapat kalian lihat, di situ ada nama² game dan nama² anomali kami jadi harap jangan takut";
+            typeText(mission4Text, missionText, () => {
+                nextMission4Btn.style.display = 'block';
+            });
+        }
+
+        // Navigate to mission 5 screen
+        function goToMission5Screen() {
+            changeScreen('mission-5-screen');
+            
+            const missionText = "Selanjutnya yaitu memakai hadsaplas yang kami berikan sebelum nya di key tersembunyi yang kalian temui di misi sebelum nya pakai dan kalian bersembunyi dan berpencar masing2 karna di salah satu kalian ada yang kerasukan, tempel hadsaplas itu ke salah satu anak terus bisa mengusir jin ghoib";
+            typeText(mission5Text, missionText, () => {
+                finishGameBtn.style.display = 'block';
+            });
+        }
+
+        // Finish game
+        function finishGame() {
+            changeScreen('complete-screen');
+            gameState.missionsCompleted = 5;
+            saveGameState();
+        }
+
+        // Create spinner items
+        function createSpinnerItems(spinnerElement, items) {
+            spinnerElement.innerHTML = '';
+            const angle = 360 / items.length;
+            
+            items.forEach((item, index) => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'spinner-item';
+                itemElement.textContent = item;
+                itemElement.style.transform = `rotate(${index * angle}deg)`;
+                spinnerElement.appendChild(itemElement);
+            });
+        }
+
+        // Type text with typing animation
+        function typeText(element, text, callback) {
+            element.textContent = '';
+            let index = 0;
+            const typingSpeed = 30; // milliseconds per character
+            
+            function type() {
+                if (index < text.length) {
+                    element.textContent += text.charAt(index);
+                    index++;
+                    setTimeout(type, typingSpeed);
+                } else if (callback) {
+                    callback();
+                }
+            }
+            
+            type();
+        }
+
+        // Change screen
+        function changeScreen(screenId) {
+            screens.forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById(screenId).classList.add('active');
+            gameState.currentScreen = screenId;
+            saveGameState();
+        }
+
+        // Erase progress
+        function eraseProgress() {
+            if (confirm('Apakah Anda yakin ingin menghapus semua progres?')) {
+                localStorage.removeItem('happyDayGameState');
+                gameState.users = [];
+                gameState.leader = null;
+                gameState.stepBackUser = null;
+                gameState.keyFound = false;
+                gameState.missionsCompleted = 0;
+                location.reload();
+            }
+        }
+
+        // Save game state to localStorage
+        function saveGameState() {
+            localStorage.setItem('happyDayGameState', JSON.stringify(gameState));
+        }
+
+        // Load game state from localStorage
+        function loadGameState() {
+            const savedState = localStorage.getItem('happyDayGameState');
+            if (savedState) {
+                const parsedState = JSON.parse(savedState);
+                Object.assign(gameState, parsedState);
+                
+                // If game was in progress, go to the last screen
+                if (gameState.currentScreen && gameState.currentScreen !== 'start-screen') {
+                    changeScreen(gameState.currentScreen);
+                }
+            }
+        }
+
+        // Check if it's alert time
+        function checkAlertTime() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            
+            // Check if it's between 19:30 and 06:00
+            if ((hours === 19 && minutes >= 30) || (hours >= 20 && hours < 24) || (hours >= 0 && hours < 6)) {
+                showAlert();
+            } else {
+                hideAlert();
+            }
+            
+            // Update countdown if alert is not active
+            if (!alertScreen.classList.contains('active')) {
+                updateCountdown();
+            }
+        }
+
+        // Show alert
+        function showAlert() {
+            if (!alertScreen.classList.contains('active')) {
+                // Change to alert screen
+                alertScreen.style.display = 'flex';
+                alertScreen.classList.add('active');
+                
+                // Set alert message
+                const alertText = "BERSEMBUNYI CEPAT MONSTERS² YANG KAMI TAHAN LEPAS KEMBALI KARNA SETIAP JAM 8 MALAM SEMUA MONSTER KELUAR PERINGATAN² BAHAYA PASTIKAN KALIAN PULANG KE RUMAH MASING² SEMUANYA, PASTIKAN ANAK KECIL DI SEKITAR KALIAN TELAH MEMASUKI RUMAH KARNA KAMI AKAN MELAKUKAN TEROR DI KAWASAN INI";
+                alertMessage.textContent = alertText;
+                
+                // Play alert background audio
+                mainBgAudio.pause();
+                alertBgAudio.play().catch(e => console.log('Alert audio play failed:', e));
+                
+                // Start video rotation
+                rotateAlertVideos();
+                
+                // Send notifications
+                sendAlertNotifications();
+                
+                // Flash camera (simulated)
+                simulateCameraFlash();
+            }
+        }
+
+        // Hide alert
+        function hideAlert() {
+            if (alertScreen.classList.contains('active')) {
+                alertScreen.classList.remove('active');
+                alertScreen.style.display = 'none';
+                
+                // Stop alert audio and resume main audio
+                alertBgAudio.pause();
+                mainBgAudio.play().catch(e => console.log('Main audio play failed:', e));
+            }
+        }
+
+        // Rotate alert videos
+        function rotateAlertVideos() {
+            if (alertScreen.classList.contains('active')) {
+                alertVideo.src = alertVideos[currentVideoIndex];
+                currentVideoIndex = (currentVideoIndex + 1) % alertVideos.length;
+                
+                setTimeout(rotateAlertVideos, 10000); // Change video every 10 seconds
+            }
+        }
+
+        // Send alert notifications
+        function sendAlertNotifications() {
+            if (gameState.permissionsGranted && 'Notification' in window) {
+                const messages = [
+                    "Hallo saya disini",
+                    "Kami di dekat mu",
+                    "Kamu di mana",
+                    "Jangan lihat ke belakang",
+                    "Dia sedang mendekat",
+                    "Lari sekarang juga"
+                ];
+                
+                messages.forEach((message, index) => {
+                    setTimeout(() => {
+                        new Notification('HAPPY DAY Alert', {
+                            body: message,
+                            icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjE2IiBoZWlnaHQ9IjE2IiBmaWxsPSIjOEIwMDAwIi8+CjxwYXRoIGQ9Ik04IDBWOE0wIDRIMTZNMiAxMkgxNE0xMCAxNEg2IiBzdHJva2U9IiNGRjAwMDAiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4K'
+                        });
+                    }, index * 5000); // Send every 5 seconds
+                });
+            }
+        }
+
+        // Simulate camera flash
+        function simulateCameraFlash() {
+            if (alertScreen.classList.contains('active')) {
+                alertScreen.classList.add('flicker');
+                
+                setTimeout(() => {
+                    alertScreen.classList.remove('flicker');
+                    if (alertScreen.classList.contains('active')) {
+                        setTimeout(simulateCameraFlash, Math.random() * 3000 + 1000); // Random interval between 1-4 seconds
+                    }
+                }, 150);
+            }
+        }
+
+        // Update countdown to next alert
+        function updateCountdown() {
+            const now = new Date();
+            let targetTime;
+            
+            // If it's before 19:30, count down to 19:30
+            if (now.getHours() < 19 || (now.getHours() === 19 && now.getMinutes() < 30)) {
+                targetTime = new Date();
+                targetTime.setHours(19, 30, 0, 0);
+            } else {
+                // Otherwise, count down to next day 19:30
+                targetTime = new Date();
+                targetTime.setDate(targetTime.getDate() + 1);
+                targetTime.setHours(19, 30, 0, 0);
+            }
+            
+            const diff = targetTime - now;
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            
+            alertCountdown.textContent = `Peringatan: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+        }
+
+        // Initialize the game when the page loads
+        window.addEventListener('load', initGame);
+    </script>
+</body>
+</html>
